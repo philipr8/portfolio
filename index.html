@@ -191,14 +191,63 @@
       position: relative;
       overflow: hidden;
     }
-    #hero::before {
-      content: '';
+    /* Animated aurora blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(90px);
+      will-change: transform, opacity;
+    }
+    .hero-blob-1 {
+      width: 560px; height: 560px;
+      background: rgba(212,150,100,0.28);
+      top: -140px; right: -60px;
+      animation: blob1 14s ease-in-out infinite alternate;
+    }
+    .hero-blob-2 {
+      width: 420px; height: 420px;
+      background: rgba(250,230,200,0.20);
+      bottom: -80px; left: -60px;
+      animation: blob2 18s ease-in-out infinite alternate;
+    }
+    .hero-blob-3 {
+      width: 300px; height: 300px;
+      background: rgba(180,100,60,0.22);
+      top: 40%; left: 38%;
+      animation: blob3 11s ease-in-out infinite alternate;
+    }
+    .hero-blob-4 {
+      width: 200px; height: 200px;
+      background: rgba(250,246,241,0.14);
+      top: 20%; left: 20%;
+      animation: blob4 16s ease-in-out infinite alternate;
+    }
+    @keyframes blob1 {
+      0%   { transform: translate(0,    0)    scale(1);    }
+      50%  { transform: translate(-40px, 60px) scale(1.08); }
+      100% { transform: translate(30px, -30px) scale(0.94); }
+    }
+    @keyframes blob2 {
+      0%   { transform: translate(0,    0)    scale(1);    }
+      50%  { transform: translate(60px, -40px) scale(1.12); }
+      100% { transform: translate(-20px, 50px) scale(0.92); }
+    }
+    @keyframes blob3 {
+      0%   { transform: translate(0,    0) scale(1);    opacity: 0.8; }
+      50%  { transform: translate(40px, 30px) scale(1.15); opacity: 1; }
+      100% { transform: translate(-30px,-20px) scale(0.88); opacity: 0.6; }
+    }
+    @keyframes blob4 {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(50px, 60px) scale(1.2); }
+    }
+    /* Particle canvas */
+    #heroCanvas {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse at 75% 40%, rgba(250,246,241,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 10% 80%, rgba(59,31,14,0.25) 0%, transparent 50%);
       pointer-events: none;
+      opacity: 0.55;
     }
     .hero-inner {
       display: grid;
@@ -263,8 +312,9 @@
     .hero-photo-ring img {
       width: 100%; height: 100%;
       border-radius: 50%;
-      object-fit: cover;
-      object-position: top center;
+      object-fit: contain;
+      object-position: center;
+      background: #f0e8de;
     }
 
     /* Hero stats */
@@ -816,6 +866,11 @@
 
   <!-- ─── Hero ──────────────────────────────────────────── -->
   <section id="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+    <div class="hero-blob hero-blob-4"></div>
     <div class="container">
       <div class="hero-inner">
         <div class="hero-content">
@@ -841,7 +896,7 @@
               <p class="hero-stat-label">Languages</p>
             </div>
             <div>
-              <p class="hero-stat-value">2</p>
+              <p class="hero-stat-value">4</p>
               <p class="hero-stat-label">Years Experience</p>
             </div>
             <div>
@@ -1190,6 +1245,72 @@
         a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--tan)' : '';
       });
     });
+
+    /* Hero particle canvas */
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      const ctx    = canvas.getContext('2d');
+      const COLORS = [
+        'rgba(250,230,200,',
+        'rgba(212,168,130,',
+        'rgba(196,140,100,',
+        'rgba(255,248,240,',
+        'rgba(180,120,80,',
+      ];
+      let W, H, particles = [];
+
+      function resize() {
+        const hero = document.getElementById('hero');
+        W = canvas.width  = hero.offsetWidth;
+        H = canvas.height = hero.offsetHeight;
+      }
+
+      function mkParticle() {
+        const r = Math.random() * 2.5 + 0.8;
+        return {
+          x:     Math.random() * W,
+          y:     Math.random() * H,
+          r,
+          vx:    (Math.random() - 0.5) * 0.35,
+          vy:    -(Math.random() * 0.5 + 0.15),
+          alpha: Math.random() * 0.5 + 0.15,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          life:  0,
+          maxLife: Math.random() * 300 + 200,
+        };
+      }
+
+      function init() {
+        resize();
+        particles = Array.from({length: 80}, mkParticle);
+        particles.forEach(p => { p.life = Math.random() * p.maxLife; });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+          p.life++;
+          if (p.life > p.maxLife) Object.assign(p, mkParticle(), {y: H + 5, life: 0});
+          const progress = p.life / p.maxLife;
+          const a = progress < 0.15
+            ? (progress / 0.15) * p.alpha
+            : progress > 0.75
+              ? ((1 - progress) / 0.25) * p.alpha
+              : p.alpha;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + a + ')';
+          ctx.fill();
+          p.x += p.vx;
+          p.y += p.vy;
+        });
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', () => { resize(); });
+      init();
+      draw();
+    })();
 
     /* Contact form → mailto fallback */
     function handleForm(e) {
