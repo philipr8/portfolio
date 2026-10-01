@@ -583,9 +583,8 @@ body.menu-open { overflow: hidden; }
    -------------------------------------------------------------------------- */
 #life { padding-top: 0; background: var(--bg); }
 .band { position: relative; height: 72vh; min-height: 520px; max-height: 820px; overflow: hidden; isolation: isolate; }
-.band img { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; object-fit: cover; object-position: 50% 60%; translate: 0 var(--py, 0px); will-change: translate; }
+.band canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--bg-2) 0%, rgba(6,6,7,.45) 30%, rgba(6,6,7,.6) 70%, var(--bg) 100%); }
-.band img { filter: saturate(.7) brightness(.85); }
 .band__inner { position: relative; z-index: 2; height: 100%; display: grid; align-content: end; gap: 18px; padding-bottom: clamp(40px, 7vh, 80px); }
 .band__inner .h2 { max-width: 22ch; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,.5); }
 .band__inner .eyebrow { color: rgba(244,242,237,.7); }
@@ -671,7 +670,6 @@ body.menu-open { overflow: hidden; }
   .hero__intro { opacity: 1; transform: none; }
   [data-reveal] { opacity: 1; translate: 0 0; transition: none; }
   .menu a, .menu, .menu__foot .btn { transition: none; }
-  .band img { translate: 0 0; }
   .phone { transform: none; transition: none; }
   * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }

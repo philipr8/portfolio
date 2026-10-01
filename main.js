@@ -15,10 +15,11 @@
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* ------------------------------------------------------------------
-     1. Aurora shader — port of the "aurora veil" preset to plain WebGL
+     1. Aurora shader — port of the "aurora veil" preset to plain WebGL.
+        Reusable: every image slot on the site mounts its own instance
+        of the same shader rather than a photo.
      ------------------------------------------------------------------ */
-  const aurora = (() => {
-    const canvas = $('#aurora');
+  function mountAurora(canvas) {
     if (!canvas) return null;
 
     const VS = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
@@ -119,15 +120,24 @@
 
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); }, { threshold: 0.01 }).observe(canvas);
     document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
-    if (finePointer) window.addEventListener('pointermove', e => { ptr.tx = e.clientX / innerWidth; ptr.ty = 1 - e.clientY / innerHeight; }, { passive: true });
+    if (finePointer) window.addEventListener('pointermove', e => {
+      // Relative to this canvas's own box, so each instance reacts to pointer
+      // position within itself rather than the whole page.
+      const r = canvas.getBoundingClientRect();
+      ptr.tx = clamp((e.clientX - r.left) / Math.max(r.width, 1), 0, 1);
+      ptr.ty = clamp(1 - (e.clientY - r.top) / Math.max(r.height, 1), 0, 1);
+    }, { passive: true });
     canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); stop(); });
     canvas.addEventListener('webglcontextrestored', () => start());
 
     draw(performance.now());
     start();
-    // The hero can pause the shader once the image covers it entirely.
+    // A caller can pause the shader once something else covers it entirely.
     return { setAllowed(v) { allowed = v; v ? start() : stop(); } };
-  })();
+  }
+
+  const aurora = mountAurora($('#aurora'));
+  const auroraLife = mountAurora($('#auroraLife'));
 
   /* ------------------------------------------------------------------
      2. Scroll-expanding hero — progress 0..1 drives CSS via --p
@@ -278,23 +288,11 @@
   })();
 
   /* ------------------------------------------------------------------
-     6. Parallax band, spotlight cards, copy email, year
+     6. Spotlight cards, copy email, year
+        (the Life band's shader is already in motion on its own, so it
+        no longer needs a scroll-driven parallax like the old photo did)
      ------------------------------------------------------------------ */
   (() => {
-    const band = $('#band'), img = band && $('img', band);
-    if (band && img && !reduced) {
-      let raf = 0;
-      const update = () => {
-        raf = 0;
-        const r = band.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > innerHeight) return;
-        const mid = (r.top + r.height / 2) - innerHeight / 2;     // distance from viewport centre
-        img.style.setProperty('--py', (-mid * 0.12).toFixed(1) + 'px');
-      };
-      window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-      update();
-    }
-
     if (finePointer) $$('.card').forEach(card => {
       card.addEventListener('pointermove', e => {
         const r = card.getBoundingClientRect();
