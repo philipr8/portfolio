@@ -259,15 +259,15 @@
       tickCd(); setInterval(tickCd, 30000);
     }
 
-    // Lily: rotate example questions
-    const q = $('#lilyQ');
+    // My Spursit: rotate season-sim status lines
+    const q = $('#liveQ');
     if (q && !reduced) {
       const qs = [
-        'Who scored in the 1984 UEFA Cup final?',
-        'How many goals did Kane score for Spurs?',
-        'What was the 1961 Double side\'s lineup?',
-        'Which pub near me is showing the game?',
-        'When was the last time we beat Arsenal away?'
+        'Matchweek 7 \u00b7 2nd in the league',
+        'Deadline day: 3 bids pending',
+        'Academy promotion: a 17-year-old debutant',
+        'Next up: tactics vs Arsenal',
+        'Season objective: top four \u2014 on track'
       ];
       let i = 0;
       setInterval(() => {

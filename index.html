@@ -161,29 +161,33 @@
       <div class="showcase__copy">
         <p class="eyebrow">Featured · Solo project · iOS · 2026</p>
         <h3 class="showcase__title">Spursit<span class="serif">.</span></h3>
-        <p class="lead">An unofficial iOS app for Tottenham Hotspur supporters — designed and built solo, from initial concept to App Store submission.</p>
+        <p class="lead">A fan-built companion app for Tottenham Hotspur supporters — match info, news, video, travel planning, a community feed, and a full football-manager game, all in one app. Designed and built solo, from concept to App Store submission.</p>
 
         <ul class="features">
           <li class="feature">
-            <span class="feature__icon"><svg><use href="#i-sparkle"/></svg></span>
-            <div><strong>Lily, an AI club historian</strong><span>A custom AI agent with knowledge of Tottenham's entire history. Fans can ask about any match, player, record or piece of trivia.</span></div>
-          </li>
-          <li class="feature">
-            <span class="feature__icon"><svg><use href="#i-pin"/></svg></span>
-            <div><strong>Pub and watch-venue finder</strong><span>113 supporters' clubs worldwide, sorted by distance, with deep-linked directions to Apple or Google Maps.</span></div>
-          </li>
-          <li class="feature">
-            <span class="feature__icon"><svg><use href="#i-compass"/></svg></span>
-            <div><strong>Away Day Hub</strong><span>Match travel planning: fixtures with local kickoff times, venues, head-to-head records and countdowns.</span></div>
+            <span class="feature__icon"><svg><use href="#i-ball"/></svg></span>
+            <div><strong>My Spursit — a full manager game</strong><span>Pick the XI, set tactics, and run a season on a probabilistic match engine with live commentary, academy development and a transfer economy — paced to the real fixture calendar, entirely offline.</span></div>
           </li>
           <li class="feature">
             <span class="feature__icon"><svg><use href="#i-pulse"/></svg></span>
-            <div><strong>Automated match data</strong><span>A results pipeline on scheduled pg_cron jobs, live match widgets, fan polls and a curated news feed — engineered for near-zero running cost.</span></div>
+            <div><strong>Matchday, always current</strong><span>Next fixture pinned with a live countdown and head-to-head history. Results sync automatically through a scheduled Edge Function — nothing updated by hand.</span></div>
+          </li>
+          <li class="feature">
+            <span class="feature__icon"><svg><use href="#i-doc"/></svg></span>
+            <div><strong>News, social and video</strong><span>Tottenham-specific stories pulled from four outlets, a curated X feed for matchday chatter, and partner YouTube channels synced on a schedule.</span></div>
+          </li>
+          <li class="feature">
+            <span class="feature__icon"><svg><use href="#i-pin"/></svg></span>
+            <div><strong>Away Days: trip planner + pub finder</strong><span>Rail departures and hotel search for away trips, plus a map of supporter pubs ranked by distance — each pulling live data through its own Edge Function.</span></div>
+          </li>
+          <li class="feature">
+            <span class="feature__icon"><svg><use href="#i-users"/></svg></span>
+            <div><strong>Shouts, a moderated community feed</strong><span>Fixture-scoped posts with full-text search in Postgres, backed by report, block, rate-limiting and row-level security — built before a single user saw it.</span></div>
           </li>
         </ul>
 
         <div class="chips" aria-label="Technologies">
-          <span class="chip">Expo</span><span class="chip">React Native</span><span class="chip">TypeScript</span><span class="chip">expo-router</span><span class="chip">Supabase</span><span class="chip">Postgres</span><span class="chip">Edge Functions</span><span class="chip">pg_cron</span>
+          <span class="chip">Expo</span><span class="chip">React Native</span><span class="chip">TypeScript</span><span class="chip">expo-router</span><span class="chip">Supabase</span><span class="chip">Postgres</span><span class="chip">Row-level security</span><span class="chip">Edge Functions</span><span class="chip">YouTube Data API</span><span class="chip">football-data.org</span>
         </div>
 
         <div class="showcase__links">
@@ -224,9 +228,9 @@
                 <div class="ph-row"><span><i class="ph-pill ph-pill--d">D</i>Arsenal 2 – 2 Spurs</span><span>2024</span></div>
                 <div class="ph-row"><span><i class="ph-pill ph-pill--l">L</i>Arsenal 1 – 0 Spurs</span><span>2024</span></div>
               </div>
-              <div class="ph-lily">
-                <div class="ph-lily__dot"><svg><use href="#i-sparkle"/></svg></div>
-                <div class="ph-lily__text"><em>Ask Lily</em><span class="ph-lily__q" id="lilyQ">Who scored in the 1984 UEFA Cup final?</span></div>
+              <div class="ph-live">
+                <div class="ph-live__dot"><svg><use href="#i-ball"/></svg></div>
+                <div class="ph-live__text"><em>My Spursit</em><span class="ph-live__q" id="liveQ">Matchweek 7 · 2nd in the league</span></div>
               </div>
             </div>
             <div class="phone__tabs">
