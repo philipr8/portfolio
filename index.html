@@ -1,1333 +1,500 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Philip Radeff — AI Student & Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    /* ─── Variables ─────────────────────────────────────── */
-    :root {
-      --espresso:   #3B1F0E;
-      --brown:      #6B3A2A;
-      --tan:        #C4A882;
-      --tan-light:  #D9C5A9;
-      --cream:      #FAF6F1;
-      --cream-alt:  #F0EAE0;
-      --text:       #2C1A10;
-      --text-muted: #7A5C48;
-      --white:      #FFFFFF;
-      --shadow:     0 4px 24px rgba(59,31,14,0.10);
-      --shadow-lg:  0 8px 40px rgba(59,31,14,0.16);
-      --radius:     12px;
-      --transition: 0.25s ease;
-    }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Philip Radeff — AI student & developer</title>
+  <meta name="description" content="Philip Radeff is a fourth-year Artificial Intelligence student at Queen's University who builds software people actually use — from Spursit, a fan app for Tottenham supporters, to mobile tools for communities in Nunavut.">
+  <meta name="author" content="Philip Radeff">
+  <meta name="theme-color" content="#060607">
+  <link rel="canonical" href="https://philipr8.github.io/portfolio/">
 
-    /* ─── Reset ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 16px;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    ul { list-style: none; }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Philip Radeff — AI student & developer">
+  <meta property="og:description" content="Fourth-year AI student at Queen's University. Building Spursit, a fan app for Tottenham supporters, and mobile tools for communities in Nunavut.">
+  <meta property="og:url" content="https://philipr8.github.io/portfolio/">
+  <meta property="og:image" content="https://philipr8.github.io/portfolio/assets/hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
-    /* ─── Typography ─────────────────────────────────────── */
-    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.25; }
-    h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; }
-    h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 600; }
-    h3 { font-size: 1.2rem; font-weight: 600; }
-    p  { color: var(--text-muted); }
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f4f2ed'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-style='italic' font-size='34' text-anchor='middle' fill='%23060607'%3EP%3C/text%3E%3C/svg%3E">
 
-    /* ─── Section wrapper ────────────────────────────────── */
-    section { padding: 96px 0; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
-    .section-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--brown);
-      margin-bottom: 10px;
-    }
-    .section-title {
-      color: var(--espresso);
-      margin-bottom: 48px;
-    }
-    .section-title span { color: var(--brown); }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css">
 
-    /* ─── Navbar ─────────────────────────────────────────── */
-    #navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: var(--espresso);
-      padding: 0 32px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
-      transition: background var(--transition);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--tan);
-      letter-spacing: 0.02em;
-    }
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      align-items: center;
-    }
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--tan-light);
-      letter-spacing: 0.04em;
-      transition: color var(--transition);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px; left: 0; right: 0;
-      height: 1.5px;
-      background: var(--tan);
-      transform: scaleX(0);
-      transition: transform var(--transition);
-      transform-origin: left;
-    }
-    .nav-links a:hover { color: var(--tan); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-
-    /* Hamburger */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--tan);
-      border-radius: 2px;
-      transition: var(--transition);
-    }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ─── Buttons ────────────────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 28px;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-      border: 2px solid transparent;
-      text-decoration: none;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      background: var(--brown);
-      color: var(--cream);
-      border-color: var(--brown);
-      box-shadow: 0 4px 14px rgba(107,58,42,0.35);
-    }
-    .btn-primary:hover {
-      background: var(--espresso);
-      border-color: var(--espresso);
-      box-shadow: 0 6px 20px rgba(59,31,14,0.4);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--espresso);
-      border-color: var(--espresso);
-    }
-    .btn-outline:hover {
-      background: var(--espresso);
-      color: var(--cream);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--brown);
-      border-color: var(--tan);
-      font-size: 0.82rem;
-      padding: 8px 16px;
-    }
-    .btn-ghost:hover {
-      background: var(--brown);
-      color: var(--cream);
-      border-color: var(--brown);
-    }
-
-    /* ─── HERO ───────────────────────────────────────────── */
-    #hero {
-      min-height: 100vh;
-      background: linear-gradient(140deg, #2A0E04 0%, #4E2214 40%, #6B3A2A 75%, #7D4830 100%);
-      display: flex;
-      align-items: center;
-      padding-top: 64px;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Animated aurora blobs */
-    .hero-blob {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(90px);
-      will-change: transform, opacity;
-    }
-    .hero-blob-1 {
-      width: 560px; height: 560px;
-      background: rgba(140,70,30,0.30);
-      top: -140px; right: -60px;
-      animation: blob1 14s ease-in-out infinite alternate;
-    }
-    .hero-blob-2 {
-      width: 420px; height: 420px;
-      background: rgba(196,130,80,0.18);
-      bottom: -80px; left: -60px;
-      animation: blob2 18s ease-in-out infinite alternate;
-    }
-    .hero-blob-3 {
-      width: 300px; height: 300px;
-      background: rgba(100,40,10,0.28);
-      top: 40%; left: 38%;
-      animation: blob3 11s ease-in-out infinite alternate;
-    }
-    .hero-blob-4 {
-      width: 200px; height: 200px;
-      background: rgba(196,160,120,0.12);
-      top: 20%; left: 20%;
-      animation: blob4 16s ease-in-out infinite alternate;
-    }
-    @keyframes blob1 {
-      0%   { transform: translate(0,    0)    scale(1);    }
-      50%  { transform: translate(-40px, 60px) scale(1.08); }
-      100% { transform: translate(30px, -30px) scale(0.94); }
-    }
-    @keyframes blob2 {
-      0%   { transform: translate(0,    0)    scale(1);    }
-      50%  { transform: translate(60px, -40px) scale(1.12); }
-      100% { transform: translate(-20px, 50px) scale(0.92); }
-    }
-    @keyframes blob3 {
-      0%   { transform: translate(0,    0) scale(1);    opacity: 0.8; }
-      50%  { transform: translate(40px, 30px) scale(1.15); opacity: 1; }
-      100% { transform: translate(-30px,-20px) scale(0.88); opacity: 0.6; }
-    }
-    @keyframes blob4 {
-      0%   { transform: translate(0,0) scale(1); }
-      100% { transform: translate(50px, 60px) scale(1.2); }
-    }
-    /* Particle canvas */
-    #heroCanvas {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.55;
-    }
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 80px;
-      align-items: center;
-      width: 100%;
-    }
-    .hero-content { max-width: 620px; }
-    .hero-eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 16px;
-    }
-    .hero-name {
-      color: #FFFFFF;
-      margin-bottom: 12px;
-      text-shadow: 0 2px 12px rgba(59,31,14,0.3);
-    }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-      color: rgba(255,255,255,0.92);
-      font-weight: 400;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-    .hero-bio {
-      color: rgba(255,255,255,0.8);
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin-bottom: 40px;
-      max-width: 540px;
-    }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-actions .btn-outline {
-      color: #FFFFFF;
-      border-color: rgba(255,255,255,0.7);
-    }
-    .hero-actions .btn-outline:hover {
-      background: rgba(255,255,255,0.2);
-      border-color: #FFFFFF;
-      color: #FFFFFF;
-    }
-
-    /* Photo */
-    .hero-photo-wrap {
-      position: relative;
-      flex-shrink: 0;
-    }
-    .hero-photo-ring {
-      width: 380px; height: 380px;
-      border-radius: 50%;
-      padding: 6px;
-      background: linear-gradient(135deg, rgba(250,246,241,0.9), var(--tan));
-      box-shadow: 0 20px 70px rgba(59,31,14,0.5), 0 0 0 12px rgba(250,246,241,0.12);
-    }
-    .hero-photo-ring img {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    /* Hero stats */
-    .hero-stats {
-      display: flex;
-      gap: 36px;
-      margin-top: 44px;
-      padding-top: 36px;
-      border-top: 1px solid rgba(250,246,241,0.2);
-      flex-wrap: wrap;
-    }
-    .hero-stat-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--cream);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .hero-stat-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(250,246,241,0.65);
-    }
-    .hero-scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--tan);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.7;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(6px); }
-    }
-
-    /* ─── ABOUT ──────────────────────────────────────────── */
-    #about { background: var(--cream); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-    }
-    .about-bio {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: var(--text-muted);
-    }
-    .about-bio strong { color: var(--espresso); }
-    .about-contact-links {
-      margin-top: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .about-contact-links a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: var(--brown);
-      font-weight: 500;
-      transition: color var(--transition);
-    }
-    .about-contact-links a i { width: 18px; color: var(--tan); }
-    .about-contact-links a:hover { color: var(--espresso); }
-
-    .skills-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--espresso);
-      margin-bottom: 20px;
-    }
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .skill-badge {
-      background: var(--cream-alt);
-      border: 1.5px solid var(--tan);
-      color: var(--brown);
-      padding: 6px 16px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      transition: background var(--transition), color var(--transition), transform var(--transition);
-    }
-    .skill-badge:hover {
-      background: var(--brown);
-      color: var(--cream);
-      transform: translateY(-2px);
-    }
-
-    /* ─── PROJECTS ───────────────────────────────────────── */
-    #projects { background: var(--cream-alt); }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 28px;
-    }
-    .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      border-left: 4px solid var(--tan);
-      padding: 28px;
-      box-shadow: var(--shadow);
-      transition: transform var(--transition), box-shadow var(--transition);
-      display: flex;
-      flex-direction: column;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-    .card-year {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--tan);
-      margin-bottom: 8px;
-    }
-    .card h3 {
-      color: var(--espresso);
-      margin-bottom: 12px;
-      font-size: 1.15rem;
-    }
-    .card p {
-      font-size: 0.92rem;
-      line-height: 1.7;
-      flex: 1;
-      margin-bottom: 20px;
-    }
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 20px;
-    }
-    .tag {
-      background: var(--cream-alt);
-      color: var(--brown);
-      font-size: 0.74rem;
-      font-weight: 600;
-      padding: 3px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--tan-light);
-    }
-    .card-footer { margin-top: auto; }
-
-    /* ─── EXPERIENCE ─────────────────────────────────────── */
-    #experience { background: var(--cream); }
-    .timeline {
-      position: relative;
-      padding-left: 36px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--tan), var(--brown));
-      border-radius: 2px;
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 52px;
-    }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-dot {
-      position: absolute;
-      left: -33px;
-      top: 6px;
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: var(--tan);
-      border: 3px solid var(--brown);
-      box-shadow: 0 0 0 3px var(--cream);
-    }
-    .timeline-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 8px 16px;
-      margin-bottom: 6px;
-    }
-    .timeline-role {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--espresso);
-    }
-    .timeline-company {
-      font-size: 0.9rem;
-      color: var(--brown);
-      font-weight: 500;
-    }
-    .timeline-date {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--tan);
-      letter-spacing: 0.06em;
-      background: var(--cream-alt);
-      padding: 2px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--tan-light);
-    }
-    .timeline-body {
-      font-size: 0.93rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      margin-bottom: 12px;
-    }
-    .timeline-tools {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    /* ─── EDUCATION ──────────────────────────────────────── */
-    #education { background: var(--cream-alt); }
-    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-    .edu-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      border-top: 4px solid var(--tan);
-      padding: 32px;
-      box-shadow: var(--shadow);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .edu-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    .edu-degree {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--espresso);
-      margin-bottom: 6px;
-    }
-    .edu-school {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--brown);
-      margin-bottom: 4px;
-    }
-    .edu-years {
-      font-size: 0.8rem;
-      color: var(--tan);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      margin-bottom: 16px;
-    }
-    .edu-body {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.72;
-    }
-    .edu-awards {
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid var(--cream-alt);
-    }
-    .edu-awards-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brown);
-      margin-bottom: 8px;
-    }
-    .edu-awards ul { display: flex; flex-direction: column; gap: 4px; }
-    .edu-awards li {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .edu-awards li::before {
-      content: '✦';
-      color: var(--tan);
-      font-size: 0.65rem;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-
-    /* ─── EXTRACURRICULARS ───────────────────────────────── */
-    #extracurriculars { background: var(--cream); }
-    .extra-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      border-left: 4px solid var(--brown);
-      padding: 36px;
-      box-shadow: var(--shadow);
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      max-width: 800px;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .extra-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    .extra-icon {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--tan), var(--brown));
-      display: flex; align-items: center; justify-content: center;
-      color: var(--cream);
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    .extra-role {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--espresso);
-      margin-bottom: 4px;
-    }
-    .extra-org {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--brown);
-      margin-bottom: 4px;
-    }
-    .extra-date {
-      font-size: 0.78rem;
-      color: var(--tan);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      margin-bottom: 12px;
-    }
-    .extra-body {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-    }
-
-    /* ─── CONTACT ────────────────────────────────────────── */
-    #contact { background: var(--cream-alt); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 64px;
-      align-items: start;
-    }
-    .contact-info h3 {
-      color: var(--espresso);
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-    }
-    .contact-info > p {
-      font-size: 0.95rem;
-      margin-bottom: 28px;
-    }
-    .contact-links { display: flex; flex-direction: column; gap: 16px; }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 18px;
-      background: var(--white);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      border: 1.5px solid transparent;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    }
-    .contact-link:hover {
-      border-color: var(--tan);
-      transform: translateX(4px);
-      box-shadow: var(--shadow-lg);
-    }
-    .contact-link-icon {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--tan), var(--brown));
-      display: flex; align-items: center; justify-content: center;
-      color: var(--cream);
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .contact-link-text strong {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-    .contact-link-text span {
-      font-size: 0.9rem;
-      color: var(--brown);
-      font-weight: 500;
-    }
-
-    /* Form */
-    .contact-form {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 36px;
-      box-shadow: var(--shadow);
-    }
-    .contact-form h3 {
-      color: var(--espresso);
-      margin-bottom: 24px;
-      font-size: 1.3rem;
-    }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 18px;
-    }
-    .form-group label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .form-group input,
-    .form-group textarea {
-      padding: 12px 16px;
-      border: 1.5px solid var(--tan-light);
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: var(--text);
-      background: var(--cream);
-      transition: border-color var(--transition), box-shadow var(--transition);
-      resize: none;
-      outline: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--brown);
-      box-shadow: 0 0 0 3px rgba(107,58,42,0.12);
-    }
-    .form-group textarea { min-height: 130px; }
-    .form-group.full { grid-column: 1 / -1; }
-    .contact-form .btn { width: 100%; justify-content: center; margin-top: 4px; }
-
-    /* ─── FOOTER ─────────────────────────────────────────── */
-    footer {
-      background: var(--espresso);
-      color: rgba(250,246,241,0.6);
-      text-align: center;
-      padding: 32px;
-      font-size: 0.85rem;
-    }
-    footer a { color: var(--tan); }
-    footer .footer-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--tan);
-      margin-bottom: 6px;
-    }
-
-    /* ─── Scroll animations ──────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── Responsive ─────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .edu-grid   { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-      .hero-content { max-width: 100%; }
-      .hero-bio { margin-left: auto; margin-right: auto; }
-      .hero-actions { justify-content: center; }
-      .hero-photo-wrap { margin: 0 auto; }
-      .hero-photo-ring { width: 300px; height: 300px; }
-      .extra-card { flex-direction: column; }
-    }
-    @media (max-width: 768px) {
-      section { padding: 72px 0; }
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 64px; left: 0; right: 0;
-        background: var(--espresso);
-        flex-direction: column;
-        gap: 0;
-        padding: 16px 0 24px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      }
-      .nav-links.open { display: flex; }
-      .nav-links a {
-        padding: 14px 32px;
-        width: 100%;
-      }
-      .nav-links a::after { display: none; }
-      .nav-toggle { display: flex; }
-      .form-row { grid-template-columns: 1fr; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .contact-form { padding: 24px; }
-    }
-    @media (max-width: 480px) {
-      .container { padding: 0 20px; }
-      .hero-photo-ring { width: 220px; height: 220px; }
-      h1 { font-size: 2rem; }
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Philip Radeff",
+    "url": "https://philipr8.github.io/portfolio/",
+    "email": "mailto:radeffphilip@gmail.com",
+    "jobTitle": "Artificial Intelligence student & software developer",
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "Queen's University" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressCountry": "CA" },
+    "sameAs": ["https://github.com/philipr8", "https://www.linkedin.com/in/philip-radeff-686b3228b"]
+  }
+  </script>
 </head>
-
 <body>
 
-  <!-- ─── Navbar ─────────────────────────────────────────── -->
-  <nav id="navbar">
-    <a href="#hero" class="nav-logo">Philip Radeff</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="game.html" style="color:var(--tan);border:1.5px solid var(--tan);padding:5px 14px;border-radius:6px;font-size:0.8rem;letter-spacing:0.06em;">⚔ Play</a></li>
-    </ul>
-  </nav>
+<!-- Icon sprite — one consistent stroke family (1.75px, round) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m0 0 6-6m-6 6-6-6"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 8.36 22.9c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.13v3.16c0 .31.2.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 8 9 6 9-6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5.5v13l11-6.5z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6.3 6.3l2.1 2.1m7.2 7.2 2.1 2.1m0-11.4-2.1 2.1M8.4 15.6l-2.1 2.1"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></symbol>
+    <symbol id="i-ball" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m12 7 3.8 2.8-1.4 4.4H9.6L8.2 9.8zM12 3v4M5.2 8l3 1.8M18.8 8l-3 1.8M8.2 19.6l1.4-5.4M15.8 19.6l-1.4-5.4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4.5-6.2"/></symbol>
+    <symbol id="i-grad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5M22 9v6"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12a4 4 0 0 1 4 4v3.5a2.5 2.5 0 0 1-4.6 1.4L16 15H8l-1.4 1.9A2.5 2.5 0 0 1 2 15.5V12a4 4 0 0 1 4-4Z"/><path d="M7.5 11v3M6 12.5h3M16 11.5h.01M18 13.5h.01"/></symbol>
+    <!-- phone tab icons -->
+    <symbol id="t-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9H3z"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="t-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10 13M21 3l-7 18-4-8-8-4z"/></symbol>
+    <symbol id="t-tv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m10 9 5 3-5 3z"/></symbol>
+    <symbol id="t-news" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></symbol>
+    <symbol id="t-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  </defs>
+</svg>
 
-  <!-- ─── Hero ──────────────────────────────────────────── -->
-  <section id="hero">
-    <canvas id="heroCanvas"></canvas>
-    <div class="hero-blob hero-blob-1"></div>
-    <div class="hero-blob hero-blob-2"></div>
-    <div class="hero-blob hero-blob-3"></div>
-    <div class="hero-blob hero-blob-4"></div>
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <p class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i>&nbsp; Toronto, Canada</p>
-          <h1 class="hero-name">Philip Radeff</h1>
-          <p class="hero-title">Artificial Intelligence Student @ Queen's University</p>
-          <p class="hero-bio">Highly driven AI student with a strong foundation in computing, machine learning, and software development. Proficient in Python, Java, C++, SQL, React Native, and more.</p>
-          <div class="hero-actions">
-            <a href="myresume.pdf" download class="btn btn-primary">
-              <i class="fa-solid fa-download"></i> Download Resume
-            </a>
-            <a href="#projects" class="btn btn-outline">
-              <i class="fa-solid fa-arrow-down"></i> View My Work
-            </a>
-          </div>
-          <div class="hero-stats">
-            <div>
-              <p class="hero-stat-value">5</p>
-              <p class="hero-stat-label">Projects Built</p>
+<a class="skip" href="#work">Skip to content</a>
+
+<!-- ───────────────────────── Navigation ───────────────────────── -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top" aria-label="Philip Radeff — home">
+      <span class="brand__mark" aria-hidden="true">P</span>
+      <span>Philip Radeff</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#work" data-nav="work">Work</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#life" data-nav="life">Life</a>
+      <a href="#experience" data-nav="experience">Experience</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--ghost" href="game.html"><svg><use href="#i-play"/></svg>Play</a>
+      <a class="btn" href="Philip_Radeff_Resume.pdf" target="_blank" rel="noopener">Résumé<svg><use href="#i-arrow"/></svg></a>
+      <button class="nav__toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <svg class="ic-open"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <a href="#work" style="--i:0">Work <span class="serif">01</span></a>
+  <a href="#about" style="--i:1">About <span class="serif">02</span></a>
+  <a href="#life" style="--i:2">Life <span class="serif">03</span></a>
+  <a href="#experience" style="--i:3">Experience <span class="serif">04</span></a>
+  <a href="#contact" style="--i:4">Contact <span class="serif">05</span></a>
+  <div class="menu__foot">
+    <a class="btn btn--ghost" href="game.html"><svg><use href="#i-play"/></svg>Play the game</a>
+    <a class="btn" href="Philip_Radeff_Resume.pdf" target="_blank" rel="noopener">Résumé<svg><use href="#i-arrow"/></svg></a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ───────────────────────── Hero ───────────────────────── -->
+<section class="hero" id="hero" aria-label="Introduction">
+  <div class="hero__stage">
+    <div class="hero__shader" aria-hidden="true"><canvas id="aurora"></canvas></div>
+    <div class="hero__vignette" aria-hidden="true"></div>
+
+    <figure class="hero__media" aria-hidden="true">
+      <img src="assets/hero.jpg" alt="" width="1920" height="1215" fetchpriority="high" decoding="async">
+    </figure>
+
+    <div class="hero__title">
+      <h1 class="hero__name">
+        <span class="w w1"><span>Philip</span></span>
+        <span class="w w2"><span>Radeff</span></span>
+      </h1>
+    </div>
+
+    <div class="hero__meta" aria-hidden="true">
+      <span>AI student · Queen's University</span>
+      <span class="dot"></span>
+      <span>Toronto, Canada</span>
+    </div>
+
+    <div class="hero__intro">
+      <p class="lead">Fourth-year Artificial Intelligence student at Queen's University. Currently building <strong>Spursit</strong>, an iOS app for Tottenham supporters, and mobile software for communities in Nunavut.</p>
+      <div class="actions">
+        <a class="btn" href="#work">See the work<svg><use href="#i-down"/></svg></a>
+        <a class="btn btn--ghost" href="#about">About me</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true"><i></i><span>Scroll</span></div>
+  </div>
+</section>
+
+<!-- ───────────────────────── Work ───────────────────────── -->
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>01 — Selected work</p>
+      <h2 class="h2" id="work-title" data-reveal style="--i:1">Selected <span class="serif">work.</span></h2>
+      <p class="lead" data-reveal style="--i:2">Production software with real users — a solo-built iOS product, client mobile and web applications, and tools built for specific communities.</p>
+    </div>
+
+    <!-- Featured: Spursit -->
+    <article class="showcase" id="spursit" data-reveal>
+      <div class="showcase__copy">
+        <p class="eyebrow">Featured · Solo project · iOS · 2026</p>
+        <h3 class="showcase__title">Spursit<span class="serif">.</span></h3>
+        <p class="lead">An unofficial iOS app for Tottenham Hotspur supporters — designed and built solo, from initial concept to App Store submission.</p>
+
+        <ul class="features">
+          <li class="feature">
+            <span class="feature__icon"><svg><use href="#i-sparkle"/></svg></span>
+            <div><strong>Lily, an AI club historian</strong><span>A custom AI agent with knowledge of Tottenham's entire history. Fans can ask about any match, player, record or piece of trivia.</span></div>
+          </li>
+          <li class="feature">
+            <span class="feature__icon"><svg><use href="#i-pin"/></svg></span>
+            <div><strong>Pub and watch-venue finder</strong><span>113 supporters' clubs worldwide, sorted by distance, with deep-linked directions to Apple or Google Maps.</span></div>
+          </li>
+          <li class="feature">
+            <span class="feature__icon"><svg><use href="#i-compass"/></svg></span>
+            <div><strong>Away Day Hub</strong><span>Match travel planning: fixtures with local kickoff times, venues, head-to-head records and countdowns.</span></div>
+          </li>
+          <li class="feature">
+            <span class="feature__icon"><svg><use href="#i-pulse"/></svg></span>
+            <div><strong>Automated match data</strong><span>A results pipeline on scheduled pg_cron jobs, live match widgets, fan polls and a curated news feed — engineered for near-zero running cost.</span></div>
+          </li>
+        </ul>
+
+        <div class="chips" aria-label="Technologies">
+          <span class="chip">Expo</span><span class="chip">React Native</span><span class="chip">TypeScript</span><span class="chip">expo-router</span><span class="chip">Supabase</span><span class="chip">Postgres</span><span class="chip">Edge Functions</span><span class="chip">pg_cron</span>
+        </div>
+
+        <div class="showcase__links">
+          <a class="link" href="https://philipr8.github.io/spursit-x-feed/" target="_blank" rel="noopener">Spurs Social feed <svg><use href="#i-arrow"/></svg></a>
+          <a class="link" href="https://x.com/i/lists/2090574733263737282" target="_blank" rel="noopener">SPURSIT list on X <svg><use href="#i-arrow"/></svg></a>
+          <span class="badge">App Store · coming soon</span>
+        </div>
+      </div>
+
+      <div class="showcase__visual" id="phoneStage">
+        <div class="showcase__glow" aria-hidden="true"></div>
+        <div class="phone" id="phone" role="img" aria-label="Mockup of the Spursit matchday screen">
+          <div class="phone__screen">
+            <div class="phone__island"></div>
+            <div class="phone__status"><span>9:41</span><span>●●●</span></div>
+            <div class="phone__body">
+              <div>
+                <div class="ph-eyebrow">Premier League · Matchweek 7</div>
+                <div class="ph-title">Matchday</div>
+              </div>
+              <div class="ph-card">
+                <div class="ph-eyebrow">Next fixture</div>
+                <div class="ph-fixture">
+                  <div><div class="ph-crest ph-crest--tot">THFC</div><div class="ph-team">Tottenham</div></div>
+                  <div class="ph-vs">VS</div>
+                  <div><div class="ph-crest ph-crest--opp">ARS</div><div class="ph-team">Arsenal</div></div>
+                </div>
+                <div class="ph-count">
+                  <div><b id="cd-d">02</b><small>days</small></div>
+                  <div><b id="cd-h">14</b><small>hrs</small></div>
+                  <div><b id="cd-m">05</b><small>min</small></div>
+                </div>
+                <div class="ph-meta">Tottenham Hotspur Stadium · Sat 15:00 (your time)</div>
+              </div>
+              <div class="ph-card">
+                <div class="ph-eyebrow">Head to head · last 3</div>
+                <div class="ph-row"><span><i class="ph-pill ph-pill--w">W</i>Spurs 3 – 1 Arsenal</span><span>2025</span></div>
+                <div class="ph-row"><span><i class="ph-pill ph-pill--d">D</i>Arsenal 2 – 2 Spurs</span><span>2024</span></div>
+                <div class="ph-row"><span><i class="ph-pill ph-pill--l">L</i>Arsenal 1 – 0 Spurs</span><span>2024</span></div>
+              </div>
+              <div class="ph-lily">
+                <div class="ph-lily__dot"><svg><use href="#i-sparkle"/></svg></div>
+                <div class="ph-lily__text"><em>Ask Lily</em><span class="ph-lily__q" id="lilyQ">Who scored in the 1984 UEFA Cup final?</span></div>
+              </div>
             </div>
-            <div>
-              <p class="hero-stat-value">3+</p>
-              <p class="hero-stat-label">Languages</p>
+            <div class="phone__tabs">
+              <div class="on"><svg><use href="#t-home"/></svg>Matchday</div>
+              <div><svg><use href="#t-plane"/></svg>Away Days</div>
+              <div><svg><use href="#t-tv"/></svg>Watch</div>
+              <div><svg><use href="#t-news"/></svg>News</div>
+              <div><svg><use href="#t-user"/></svg>Profile</div>
             </div>
-            <div>
-              <p class="hero-stat-value">4</p>
-              <p class="hero-stat-label">Years Experience</p>
-            </div>
-            <div>
-              <p class="hero-stat-value">AI</p>
-              <p class="hero-stat-label">Specialization</p>
-            </div>
-          </div>
-        </div>
-        <div class="hero-photo-wrap">
-          <div class="hero-photo-ring">
-            <img src="profilephoto.png" alt="Philip Radeff" />
+            <div class="phone__home"></div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <i class="fa-solid fa-chevron-down"></i>
-      <span>Scroll</span>
-    </div>
-  </section>
+    </article>
 
-  <!-- ─── About ─────────────────────────────────────────── -->
-  <section id="about">
-    <div class="container">
-      <p class="section-label reveal">Who I Am</p>
-      <h2 class="section-title reveal">About <span>Me</span></h2>
-      <div class="about-grid">
-        <div class="reveal">
-          <p class="about-bio">
-            I'm an AI student at <strong>Queen's University</strong> passionate about building real-world solutions through technology. From Python games to machine learning tools and mobile apps, I bring both technical depth and creative drive to every project.
-          </p>
-          <div class="about-contact-links">
-            <a href="mailto:radeffphilip@gmail.com">
-              <i class="fa-solid fa-envelope"></i> radeffphilip@gmail.com
-            </a>
-            <a href="tel:6476275374">
-              <i class="fa-solid fa-phone"></i> (647) 627-5374
-            </a>
-            <a href="https://github.com/philipr8" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> github.com/philipr8
-            </a>
-            <a href="https://www.linkedin.com/in/philip-radeff" target="_blank" rel="noopener">
-              <i class="fa-brands fa-linkedin"></i> linkedin.com/in/philip-radeff
-            </a>
-          </div>
+    <!-- Other projects -->
+    <div class="projects" id="projects">
+
+      <article class="card" data-reveal style="--i:0">
+        <div class="card__top"><span class="card__idx">02</span><span class="card__year">2025 — 26</span></div>
+        <h3 class="card__title">Kivalliq Jobs &amp; Training App <small>Arktis Solutions</small></h3>
+        <p>A cross-platform mobile app connecting job seekers in Nunavut's Kivalliq Region with job and training listings, and giving employers tools to post and manage openings. Bilingual Inuktitut (syllabics and roman orthography) and English, with offline and low-bandwidth handling built for northern connectivity.</p>
+        <div class="chips"><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">TypeScript</span><span class="chip">Supabase</span><span class="chip">EAS</span></div>
+        <div class="card__links"><span class="badge">Client work · private</span></div>
+      </article>
+
+      <article class="card" data-reveal style="--i:1">
+        <div class="card__top"><span class="card__idx">03</span><span class="card__year">2026</span></div>
+        <h3 class="card__title">Arktis PM <small>Arktis Solutions</small></h3>
+        <p>An internal project-management web application with a Linear-style interface: keyboard-first, with a Cmd+K command palette, task reminders and real-time sync.</p>
+        <div class="chips"><span class="chip">React</span><span class="chip">Tailwind CSS</span><span class="chip">shadcn/ui</span><span class="chip">Framer Motion</span><span class="chip">Firebase</span></div>
+        <div class="card__links"><span class="badge">Client work · private</span></div>
+      </article>
+
+      <article class="card" data-reveal style="--i:0">
+        <div class="card__top"><span class="card__idx">04</span><span class="card__year">2026</span></div>
+        <h3 class="card__title">MONI <small>MCAT study companion</small></h3>
+        <p>A full-stack study application for MCAT candidates: chapter-level tracking across six subjects, a study calendar, streaks and note uploads, with Firebase authentication and real-time sync.</p>
+        <div class="chips"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Tailwind CSS</span><span class="chip">Framer Motion</span><span class="chip">Firebase</span></div>
+        <div class="card__links">
+          <a class="link" href="https://moni7.netlify.app" target="_blank" rel="noopener">Live app <svg><use href="#i-arrow"/></svg></a>
+          <a class="link" href="https://github.com/philipr8/moni" target="_blank" rel="noopener">GitHub <svg><use href="#i-arrow"/></svg></a>
         </div>
-        <div class="reveal">
-          <p class="skills-title">Skills &amp; Technologies</p>
-          <div class="skills-grid">
-            <span class="skill-badge">Python</span>
-            <span class="skill-badge">Java</span>
-            <span class="skill-badge">C++</span>
-            <span class="skill-badge">HTML &amp; CSS</span>
-            <span class="skill-badge">SQL</span>
-            <span class="skill-badge">Machine Learning</span>
-            <span class="skill-badge">React Native</span>
-            <span class="skill-badge">Expo</span>
-            <span class="skill-badge">TypeScript</span>
-            <span class="skill-badge">Tableau</span>
-            <span class="skill-badge">Looker</span>
-            <span class="skill-badge">Git / GitHub</span>
-          </div>
+      </article>
+
+      <article class="card" data-reveal style="--i:1">
+        <div class="card__top"><span class="card__idx">05</span><span class="card__year">2026</span></div>
+        <h3 class="card__title">ABSQU website <small>Balkan Students at Queen's</small></h3>
+        <p>Rebuilt the association's website from the ground up, migrating it off Google Sites onto GitHub Pages with a custom design, event listings and an Instagram-driven community section.</p>
+        <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">GitHub Pages</span></div>
+        <div class="card__links">
+          <a class="link" href="https://philipr8.github.io/balkan-club/" target="_blank" rel="noopener">Live site <svg><use href="#i-arrow"/></svg></a>
+          <a class="link" href="https://github.com/philipr8/balkan-club" target="_blank" rel="noopener">GitHub <svg><use href="#i-arrow"/></svg></a>
         </div>
+      </article>
+
+
+      <article class="card" data-reveal style="--i:0">
+        <div class="card__top"><span class="card__idx">06</span><span class="card__year">2026</span></div>
+        <h3 class="card__title">Deki <small>Stock portfolio tracker</small></h3>
+        <p>A monochrome, Wealthsimple-inspired portfolio tracker with dividend forecasting. Live prices from Finnhub, historicals from Alpha Vantage, Google sign-in, and a tiny Express + SQLite backend.</p>
+        <div class="chips"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Recharts</span><span class="chip">Node.js</span><span class="chip">SQLite</span></div>
+        <div class="card__links"><span class="badge">Private repo</span></div>
+      </article>
+
+
+      <article class="card" data-reveal style="--i:1">
+        <div class="card__top"><span class="card__idx">07</span><span class="card__year">2022</span></div>
+        <h3 class="card__title">World Cup Challenger <small>Python</small></h3>
+        <p>A World Cup-themed, Space Invaders-style game in Python: defend your goal against waves of national teams with escalating difficulty.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Pygame</span><span class="chip">Game dev</span></div>
+        <div class="card__links">
+          <a class="link" href="https://youtu.be/_4wh2_yCnGg" target="_blank" rel="noopener">Watch the demo <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── About ───────────────────────── -->
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>02 — About</p>
+      <h2 class="h2" id="about-title" data-reveal style="--i:1">Fourth-year AI student. <span class="serif">Working</span> developer.</h2>
+    </div>
+
+    <div class="about">
+      <figure class="portrait" data-reveal>
+        <img src="assets/philip.jpg" alt="Philip Radeff, smiling, in a navy quarter-zip" width="745" height="1000" loading="lazy" decoding="async">
+        <figcaption class="portrait__cap"><span>Philip Radeff</span><span>Toronto ⇄ Kingston</span></figcaption>
+      </figure>
+
+      <div class="about__text">
+        <p class="lead" data-reveal>I'm Philip — a fourth-year Artificial Intelligence student at <strong>Queen's University</strong>, graduating in May 2027, and a Torontonian who spends most weeks in Kingston.</p>
+        <p data-reveal style="--i:1">At <strong>Arktis Solutions</strong> I build mobile and web software for Indigenous organisations in Nunavut and support the firm's financial and policy consulting. That work has ranged from a React Native release for the Kivalliq Region to a comparative analysis of Inuit Impact and Benefit Agreements.</p>
+        <p data-reveal style="--i:2">Outside work I'm building <strong>Spursit</strong> independently, from concept to App Store launch. I'm most interested in products that are simple to use and dependable in practice.</p>
+
+        <div class="facts" data-reveal style="--i:3">
+          <div class="fact"><b>Queen's University</b><span>BSc · AI specialization</span></div>
+          <div class="fact"><b>May 2027</b><span>Expected graduation</span></div>
+          <div class="fact"><b>Toronto, ON</b><span>Home base</span></div>
+        </div>
+
+        <dl class="stack" data-reveal style="--i:4">
+          <div><dt>Languages</dt><dd>Python, TypeScript / JavaScript, Java, C++, SQL, HTML &amp; CSS</dd></div>
+          <div><dt>Mobile &amp; web</dt><dd>React Native, Expo, expo-router, React, Tailwind CSS, shadcn/ui, Framer Motion, REST APIs</dd></div>
+          <div><dt>Backend &amp; data</dt><dd>Supabase, PostgreSQL, machine learning, spaCy, Tableau, Looker</dd></div>
+          <div><dt>Tools</dt><dd>Git / GitHub, EAS Build, Xcode Simulator, Android Emulator, VS Code</dd></div>
+        </dl>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ─── Projects ──────────────────────────────────────── -->
-  <section id="projects">
-    <div class="container">
-      <p class="section-label reveal">What I've Built</p>
-      <h2 class="section-title reveal">Featured <span>Projects</span></h2>
-      <div class="projects-grid">
-
-        <!-- World Cup Challenger -->
-        <div class="card reveal">
-          <p class="card-year">2022</p>
-          <h3>World Cup Challenger</h3>
-          <p>A World Cup-themed Python game inspired by Space Invaders. Defend your goal against waves of attacking nations across escalating rounds to win the tournament.</p>
-          <div class="card-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Game Dev</span>
-          </div>
-        </div>
-
-        <!-- Jon Snow Chronicles -->
-        <div class="card reveal">
-          <p class="card-year">2023</p>
-          <h3>The Jon Snow Chronicles</h3>
-          <p>A 2D Java platformer inspired by Game of Thrones. Play as Jon Snow navigating iconic battles with custom graphics, enemy AI, and level design.</p>
-          <div class="card-tags">
-            <span class="tag">Java</span>
-            <span class="tag">Game Dev</span>
-          </div>
-        </div>
-
-        <!-- Sentiment Analysis -->
-        <div class="card reveal">
-          <p class="card-year">2024</p>
-          <h3>Customer Sentiment Analysis Tool</h3>
-          <p>A machine learning pipeline using Random Forest to analyze customer reviews, with sentiment trends visualized in a dynamic Tableau dashboard.</p>
-          <div class="card-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Tableau</span>
-          </div>
-        </div>
-
-        <!-- Legal Document Analyzer -->
-        <div class="card reveal">
-          <p class="card-year">2024</p>
-          <h3>Legal Document Analyzer</h3>
-          <p>A Python + spaCy NLP app that helps lawyers identify key clauses and flag red flags in lengthy legal documents using a custom rule-based engine.</p>
-          <div class="card-tags">
-            <span class="tag">Python</span>
-            <span class="tag">NLP</span>
-            <span class="tag">spaCy</span>
-          </div>
-        </div>
-
-        <!-- Nunavut App -->
-        <div class="card reveal">
-          <p class="card-year">2025</p>
-          <h3>Nunavut Community Job App</h3>
-          <p>A cross-platform mobile app built for Indigenous communities in the Kivalliq Region of Nunavut, featuring job and training listings, employer posting workflows, role-based authentication, and bilingual support.</p>
-          <div class="card-tags">
-            <span class="tag">React Native</span>
-            <span class="tag">Expo</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">REST APIs</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/philipr8/project-app" target="_blank" rel="noopener" class="btn btn-ghost">
-              <i class="fa-brands fa-github"></i> View on GitHub
-            </a>
-          </div>
-        </div>
-
-      </div>
+<!-- ───────────────────────── Life ───────────────────────── -->
+<section class="section" id="life" aria-labelledby="life-title">
+  <div class="band" id="band">
+    <img src="assets/life.jpg" alt="" width="1920" height="1227" loading="lazy" decoding="async">
+    <div class="wrap band__inner">
+      <p class="eyebrow" data-reveal>03 — Life</p>
+      <h2 class="h2" id="life-title" data-reveal style="--i:1">Beyond the <span class="serif">work.</span></h2>
     </div>
-  </section>
+  </div>
 
-  <!-- ─── Experience ────────────────────────────────────── -->
-  <section id="experience">
-    <div class="container">
-      <p class="section-label reveal">Work History</p>
-      <h2 class="section-title reveal">Experience</h2>
-      <div class="timeline">
-
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <span class="timeline-role">Software Development Contractor</span>
-            <span class="timeline-company">Arktis Solutions Inc. &mdash; Kingston</span>
-            <span class="timeline-date">Dec 2025 – Present</span>
-          </div>
-          <p class="timeline-body">
-            Building a cross-platform React Native + Expo mobile app for Kivalliq Region Indigenous communities, featuring job and training listings, role-based authentication, employer posting workflows, and REST API integration.
-          </p>
-          <div class="timeline-tools">
-            <span class="tag">React Native</span>
-            <span class="tag">Expo</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">React Navigation</span>
-            <span class="tag">EAS Build</span>
-            <span class="tag">Git / GitHub</span>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <span class="timeline-role">Warehouse Associate</span>
-            <span class="timeline-company">The Beer Store &mdash; Oshawa</span>
-            <span class="timeline-date">May 2024 – Present</span>
-          </div>
-          <p class="timeline-body">
-            Performed data analysis for inventory tracking, managed order processing workflows, and collaborated with teams to hit daily performance targets.
-          </p>
-        </div>
-
-      </div>
+  <div class="wrap">
+    <div class="life-grid">
+      <article class="life-card" data-reveal style="--i:0">
+        <div class="life-card__icon"><svg><use href="#i-ball"/></svg></div>
+        <h3>Tottenham Hotspur <small>Lifelong supporter</small></h3>
+        <p>A lifelong Spurs supporter. Spursit grew out of wanting a better matchday experience for fans, and is now my main independent project.</p>
+      </article>
+      <article class="life-card" data-reveal style="--i:1">
+        <div class="life-card__icon"><svg><use href="#i-users"/></svg></div>
+        <h3>Co-President, ABSQU <small>Jan 2025 — present</small></h3>
+        <p>I co-lead the Association of Balkan Students at Queen's: cultural, educational and social events, fundraising, and partnerships with the university. I also rebuilt the association's website.</p>
+        <a class="link" href="https://philipr8.github.io/balkan-club/" target="_blank" rel="noopener">Visit ABSQU <svg><use href="#i-arrow"/></svg></a>
+      </article>
+      <article class="life-card" data-reveal style="--i:2">
+        <div class="life-card__icon"><svg><use href="#i-grad"/></svg></div>
+        <h3>CasConnect Advisor, COMPSA <small>Sep 2026 — present</small></h3>
+        <p>Through the Computing Students' Association I help fellow Queen's computing students connect with the resources and community available in the School of Computing.</p>
+      </article>
+      <article class="life-card" data-reveal style="--i:3">
+        <div class="life-card__icon"><svg><use href="#i-gamepad"/></svg></div>
+        <h3>Game development <small>Since high school</small></h3>
+        <p>I've built games since high school, including a Python arcade shooter and a Java platformer. <em>Beyond the Wall</em>, a browser endless runner, is playable here.</p>
+        <a class="link" href="game.html">Play Beyond the Wall <svg><use href="#i-arrow"/></svg></a>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ─── Education ─────────────────────────────────────── -->
-  <section id="education">
-    <div class="container">
-      <p class="section-label reveal">Academic Background</p>
-      <h2 class="section-title reveal">Education</h2>
-      <div class="edu-grid">
-
-        <div class="edu-card reveal">
-          <p class="edu-degree">BSc Specialization in Artificial Intelligence</p>
-          <p class="edu-school">Queen's University &mdash; Kingston</p>
-          <p class="edu-years">2023 – Present</p>
-          <p class="edu-body">
-            <strong style="color:var(--espresso);">Relevant Courses:</strong><br />
-            Computer Architecture, Data Structures, Machine Learning, Software QA, Numerical Optimization for AI, Cognitive Science, and more.
-          </p>
-        </div>
-
-        <div class="edu-card reveal">
-          <p class="edu-degree">High School Diploma</p>
-          <p class="edu-school">St. Michael's College School &mdash; Toronto</p>
-          <p class="edu-years">2019 – 2023</p>
-          <div class="edu-awards">
-            <p class="edu-awards-label">Awards &amp; Honours</p>
-            <ul>
-              <li>The St. Michael's Medal (Law)</li>
-              <li>Ontario Scholar</li>
-              <li>St. Thomas More Society Award — Top 5 Average, Gr. 9–11</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
+<!-- ───────────────────────── Experience & education ───────────────────────── -->
+<section class="section" id="experience" aria-labelledby="exp-title">
+  <div class="wrap timeline">
+    <div class="timeline__side">
+      <p class="eyebrow" data-reveal>04 — Experience &amp; education</p>
+      <h2 class="h2" id="exp-title" data-reveal style="--i:1">Where I've <span class="serif">worked</span> and learned.</h2>
+      <p class="muted" data-reveal style="--i:2">Full details are in the résumé.</p>
+      <div data-reveal style="--i:3"><a class="btn btn--ghost" href="Philip_Radeff_Resume.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Download résumé</a></div>
     </div>
-  </section>
 
-  <!-- ─── Extracurriculars ──────────────────────────────── -->
-  <section id="extracurriculars">
-    <div class="container">
-      <p class="section-label reveal">Beyond the Classroom</p>
-      <h2 class="section-title reveal">Extracurriculars</h2>
-      <div class="extra-card reveal">
-        <div class="extra-icon"><i class="fa-solid fa-users"></i></div>
+    <div class="entries">
+      <article class="entry" data-reveal>
+        <div class="entry__when">Dec 2025 — Present</div>
         <div>
-          <p class="extra-role">Vice President</p>
-          <p class="extra-org">Association of Balkan Students at Queen's University</p>
-          <p class="extra-date">Jan 2025 – Present</p>
-          <p class="extra-body">
-            Led cultural event planning, managed partnerships with university administration, organized fundraising initiatives, and advocated for Balkan student representation on campus.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Contact ───────────────────────────────────────── -->
-  <section id="contact">
-    <div class="container">
-      <p class="section-label reveal">Get In Touch</p>
-      <h2 class="section-title reveal">Contact <span>Me</span></h2>
-      <div class="contact-grid">
-        <div class="reveal">
-          <h3>Let's Connect</h3>
-          <p>I'm always open to new opportunities, collaborations, and conversations. Reach out anytime.</p>
-          <div class="contact-links" style="margin-top:28px;">
-            <a href="mailto:radeffphilip@gmail.com" class="contact-link">
-              <div class="contact-link-icon"><i class="fa-solid fa-envelope"></i></div>
-              <div class="contact-link-text">
-                <strong>Email</strong>
-                <span>radeffphilip@gmail.com</span>
-              </div>
-            </a>
-            <a href="https://github.com/philipr8" target="_blank" rel="noopener" class="contact-link">
-              <div class="contact-link-icon"><i class="fa-brands fa-github"></i></div>
-              <div class="contact-link-text">
-                <strong>GitHub</strong>
-                <span>github.com/philipr8</span>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/philip-radeff" target="_blank" rel="noopener" class="contact-link">
-              <div class="contact-link-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-              <div class="contact-link-text">
-                <strong>LinkedIn</strong>
-                <span>linkedin.com/in/philip-radeff</span>
-              </div>
-            </a>
+          <h3 class="entry__role">Software Developer Intern</h3>
+          <p class="entry__org">Arktis Solutions Inc. <em>· Kingston</em></p>
+          <div class="entry__sub">
+            <div>
+              <h4>Kivalliq Jobs &amp; Training App</h4>
+              <ul class="bullets">
+                <li>Built a cross-platform React Native + Expo app connecting job seekers with job and training listings, and giving employers tools to post and manage openings.</li>
+                <li>Delivered bilingual Inuktitut (syllabics and roman orthography) and English support with offline / low-bandwidth handling suited to northern connectivity.</li>
+                <li>Implemented role-based job-seeker and employer flows with authentication-gated access, backed by Supabase and REST APIs; shipped builds via EAS.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Arktis PM</h4>
+              <ul class="bullets">
+                <li>Built an internal project-management web app with a Linear-style interface in React, Tailwind CSS, shadcn/ui and Framer Motion, including a Cmd+K command palette.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Financial &amp; policy consulting</h4>
+              <ul class="bullets">
+                <li>Supported financial and accounting analysis for Indigenous clients, including a review related to a major mining operator.</li>
+                <li>Produced a comparative analysis of Inuit Impact and Benefit Agreements for the Kivalliq Inuit Association, and drafted the work plan for a Community Impact and Readiness Study across five Kitikmeot communities.</li>
+              </ul>
+            </div>
           </div>
         </div>
+      </article>
 
-        <div class="contact-form reveal">
-          <h3>Send a Message</h3>
-          <form id="contactForm" onsubmit="handleForm(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" placeholder="Jane" required />
-              </div>
-              <div class="form-group">
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" placeholder="Doe" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="jane@example.com" required />
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" placeholder="Opportunity / Collaboration / Hello" />
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">
-              <i class="fa-solid fa-paper-plane"></i> Send Message
-            </button>
-            <p id="formStatus" style="margin-top:12px;font-size:0.88rem;display:none;"></p>
-          </form>
+      <article class="entry" data-reveal>
+        <div class="entry__when">May 2024 — Present</div>
+        <div>
+          <h3 class="entry__role">Warehouse Associate</h3>
+          <p class="entry__org">The Beer Store <em>· Oshawa</em></p>
+          <ul class="bullets" style="margin-top:14px">
+            <li>Tracked inventory levels and flagged discrepancies; picked, packed and dispatched orders against daily performance targets.</li>
+            <li>Operated forklifts and pallet jacks, maintaining accurate records of orders, shipments and inventory.</li>
+          </ul>
         </div>
-      </div>
+      </article>
+
+      <article class="entry" data-reveal>
+        <div class="entry__when">2023 — 2027</div>
+        <div>
+          <h3 class="entry__role">BSc, Specialization in Artificial Intelligence</h3>
+          <p class="entry__org">Queen's University <em>· Kingston · expected May 2027</em></p>
+          <ul class="bullets" style="margin-top:14px">
+            <li>Operating Systems, Evolutionary Optimization and Learning, Numerical Optimization for AI, Data Structures, System-Level Programming, Computer Architecture, Software Specifications, Software Quality Assurance, Linear Data Analysis, Logic for Computing, Discrete Structures II, Statistics, Cognitive Science.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry" data-reveal>
+        <div class="entry__when">2019 — 2023</div>
+        <div>
+          <h3 class="entry__role">High School Diploma</h3>
+          <p class="entry__org">St. Michael's College School <em>· Toronto</em></p>
+          <div class="entry__awards">
+            <span class="chip">The St. Michael's Medal (Law)</span>
+            <span class="chip">Ontario Scholar</span>
+            <span class="chip">St. Thomas More Society Award · Top 5 average, Gr. 9–11</span>
+          </div>
+        </div>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ─── Footer ────────────────────────────────────────── -->
-  <footer>
-    <p class="footer-name">Philip Radeff</p>
-    <p>&copy; 2026 Philip Radeff &mdash; Built with care &amp; vanilla HTML/CSS/JS</p>
-  </footer>
+<!-- ───────────────────────── Contact ───────────────────────── -->
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact">
+    <p class="eyebrow" data-reveal>05 — Contact</p>
+    <h2 class="h2" id="contact-title" data-reveal style="--i:1">Get in <span class="serif">touch.</span></h2>
+    <p class="lead" data-reveal style="--i:2">Open to internships and new-grad roles for 2027. Email is the fastest way to reach me.</p>
 
-  <!-- ─── JavaScript ────────────────────────────────────── -->
-  <script>
-    /* Hamburger */
-    const toggle = document.getElementById('navToggle');
-    const links  = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('open');
-      links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        toggle.classList.remove('open');
-        links.classList.remove('open');
-      });
-    });
+    <div class="email" data-reveal style="--i:3">
+      <a href="mailto:radeffphilip@gmail.com">radeffphilip@gmail.com</a>
+      <button class="copy" id="copyEmail" type="button" aria-label="Copy email address"><svg class="ic-copy"><use href="#i-copy"/></svg><span>copy</span></button>
+    </div>
 
-    /* Scroll reveal */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    <div class="contact__links" data-reveal style="--i:4">
+      <a class="btn btn--ghost" href="https://github.com/philipr8" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>GitHub</a>
+      <a class="btn btn--ghost" href="https://www.linkedin.com/in/philip-radeff-686b3228b" target="_blank" rel="noopener"><svg><use href="#i-linkedin"/></svg>LinkedIn</a>
+      <a class="btn btn--ghost" href="tel:+16476275374"><svg><use href="#i-mail"/></svg>(647) 627-5374</a>
+      <a class="btn" href="Philip_Radeff_Resume.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Résumé (PDF)</a>
+    </div>
+  </div>
+</section>
 
-    /* Active nav link highlight */
-    const sections = document.querySelectorAll('section[id]');
-    const navAs    = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let cur = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 90) cur = s.id;
-      });
-      navAs.forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--tan)' : '';
-      });
-    });
+</main>
 
-    /* Hero particle canvas */
-    (function() {
-      const canvas = document.getElementById('heroCanvas');
-      const ctx    = canvas.getContext('2d');
-      const COLORS = [
-        'rgba(250,230,200,',
-        'rgba(212,168,130,',
-        'rgba(196,140,100,',
-        'rgba(255,248,240,',
-        'rgba(180,120,80,',
-      ];
-      let W, H, particles = [];
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div>© <span id="year">2026</span> Philip Radeff · Toronto / Kingston</div>
+    <div class="footer__right">
+      <span>Designed and built from scratch — HTML, CSS and WebGL.</span>
+      <a href="game.html">Play Beyond the Wall ↗</a>
+      <a href="https://github.com/philipr8/portfolio" target="_blank" rel="noopener">Source ↗</a>
+    </div>
+  </div>
+</footer>
 
-      function resize() {
-        const hero = document.getElementById('hero');
-        W = canvas.width  = hero.offsetWidth;
-        H = canvas.height = hero.offsetHeight;
-      }
-
-      function mkParticle() {
-        const r = Math.random() * 2.5 + 0.8;
-        return {
-          x:     Math.random() * W,
-          y:     Math.random() * H,
-          r,
-          vx:    (Math.random() - 0.5) * 0.35,
-          vy:    -(Math.random() * 0.5 + 0.15),
-          alpha: Math.random() * 0.5 + 0.15,
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
-          life:  0,
-          maxLife: Math.random() * 300 + 200,
-        };
-      }
-
-      function init() {
-        resize();
-        particles = Array.from({length: 80}, mkParticle);
-        particles.forEach(p => { p.life = Math.random() * p.maxLife; });
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        particles.forEach(p => {
-          p.life++;
-          if (p.life > p.maxLife) Object.assign(p, mkParticle(), {y: H + 5, life: 0});
-          const progress = p.life / p.maxLife;
-          const a = progress < 0.15
-            ? (progress / 0.15) * p.alpha
-            : progress > 0.75
-              ? ((1 - progress) / 0.25) * p.alpha
-              : p.alpha;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = p.color + a + ')';
-          ctx.fill();
-          p.x += p.vx;
-          p.y += p.vy;
-        });
-        requestAnimationFrame(draw);
-      }
-
-      window.addEventListener('resize', () => { resize(); });
-      init();
-      draw();
-    })();
-
-    /* Contact form → mailto fallback */
-    function handleForm(e) {
-      e.preventDefault();
-      const f = e.target;
-      const name    = f.fname.value + ' ' + f.lname.value;
-      const email   = f.email.value;
-      const subject = f.subject.value || 'Portfolio Contact';
-      const body    = f.message.value;
-      const mailto  = `mailto:radeffphilip@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + name + ' <' + email + '>\n\n' + body)}`;
-      window.location.href = mailto;
-      const status = document.getElementById('formStatus');
-      status.style.display = 'block';
-      status.style.color = 'var(--brown)';
-      status.textContent = 'Opening your mail client...';
-    }
-  </script>
-
+<script src="main.js" defer></script>
 </body>
 </html>
