@@ -298,10 +298,12 @@ body.menu-open { overflow: hidden; }
   overflow: hidden;
   box-shadow: 0 60px 140px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, calc(0.12 * (1 - var(--p))));
   transform: translateZ(0);
-}
-.hero__media img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%;
-  scale: calc(1.18 - var(--p) * 0.18);
+  /* Same palette as .hero__shader behind it, so the card reads as a continuation
+     of the page background rather than a separate photo. */
+  background:
+    radial-gradient(62% 52% at 28% 26%, rgba(89, 216, 190, 0.26), transparent 62%),
+    radial-gradient(52% 44% at 80% 76%, rgba(236, 120, 60, 0.20), transparent 64%),
+    linear-gradient(150deg, #0b1815 0%, #0d1210 46%, #07080a 100%);
 }
 .hero__media::after {
   content: ""; position: absolute; inset: 0;
@@ -318,7 +320,7 @@ body.menu-open { overflow: hidden; }
   transform-origin: 50% 50%;
 }
 .hero__name {
-  font-size: clamp(3.6rem, 12.5vw, 10.5rem);
+  font-size: clamp(3rem, min(12.5vw, 17vh), 10.5rem);
   line-height: 0.9; letter-spacing: -0.04em; font-weight: 500;
   color: #fff; text-shadow: 0 10px 60px rgba(0, 0, 0, 0.35);
   display: grid; justify-items: center;
